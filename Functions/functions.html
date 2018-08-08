@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Functions</title>
+</head>
+
+<body>
+    <script>
+        //====================== Arrow Functions =========================== //
+
+        const names = ['John', 'Newt', 'Dan']
+
+        const fullnames = names.map(function (name) {
+            return `${name} Wick`
+        })
+
+        console.log(fullnames)
+
+        const fullnames1 = names.map((name) => {
+            return `${name} Wick`
+        })
+
+        console.log(fullnames1)
+
+        const fullnames2 = names.map(name => {
+            return `${name} Wick`
+        })
+
+        console.log(fullnames2)
+
+        const fullnames3 = names.map(name => `${name} Wick`)
+
+        console.log(fullnames3)
+
+        // Function Declaration
+
+        const sayMyName = (name) => {
+            console.log(`Hello ${name}`)
+        }
+
+        sayMyName('Vetri')
+
+        //====================== More Arrow Functions =========================== //
+
+        const race = '100m Dash';
+        const winners = ['Usain Bolt', 'Rug Tash', 'Wes Bos']
+
+        const win = winners.map((winner, i) => ({ names: winner, race, place: i }))
+
+        console.log(win)
+
+        const ages = [23, 34, 45, 56, 60, 23, 66, 89, 99];
+
+        const old = ages.filter(age => age > 60)
+
+        console.log(old)
+
+        //======================Arguments in Arrow Functions =========================== //
+
+        const calculateBill = (total, tax = 0.13, tip = 0.4) => {
+            return total + (total * tax) + (total * tip)
+        }
+
+        const totalBill = calculateBill(100, undefined, 0.2);
+
+        console.log(totalBill)
+    </script>
+
+</body>
+
+</html>

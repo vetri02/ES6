@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Variables</title>
+</head>
+
+<body>
+
+    <script>
+        //====================== var Scoping =========================== //
+
+        function setWidth() {
+            var width = 100;
+            console.log(width)
+
+
+        }
+
+        setWidth()
+
+        var age = 12;
+
+        if (age >= 12) {
+            const dogYears = age * 7;
+            console.log(`You are ${dogYears} old!`)
+
+        }
+
+        let height = 200;
+        const key = 'asdfdsa';
+
+        //========================== let vs const ============================== //
+
+        const keyHash = 'qwweew';
+        let points = 50;
+        let winner = false;
+
+        if (points > 40) {
+            console.log('it ran1');
+            let winner = true; // this is in a different scope
+        }
+
+        const person = {
+            name: 'Vetri',
+            age: 32
+        }
+
+        console.log(person);
+
+        person.name = 'chelvan'
+
+        console.log(person);
+
+        const vetri = Object.freeze(person) // Freeze no change possible
+
+        console.log(vetri);
+
+        vetri.age = 33;
+
+        console.log(vetri);
+
+
+        //========================== let and const in the real world ============================== //
+
+
+
+        (function () {
+            var name = 'IIFE'
+            console.log(name);
+        })()
+
+        console.log(name);
+
+        {
+            const name = 'block const'  // SAME SCOPE AS IIFE
+            console.log(name);
+        }
+
+        console.log(name);
+
+        for (let i = 0; i < 10; i++) {
+            console.log(i)
+            setTimeout(() => {
+                console.log(`the number is ${i}`);
+            }, 1000);
+            setTimeout(function () {
+                console.log(`the number is ${i}`);
+            }, 1000)
+        }
+
+
+        //========================== End ============================== //
+
+    </script>
+</body>
+
+</html>
