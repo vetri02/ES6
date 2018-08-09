@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template Literal</title>
+    <style>
+        .hl {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+        //====================== HTML Fragments =========================== //
+
+        const inventors = [
+        { first: "Albert", last: "Einstein", year: 1879 },
+        { first: "Isaac", last: "Newton", year: 1643 },
+        { first: "Galileo", last: "Galilei", year: 1564 },
+        { first: "Marie", last: "Curie", year: 1867 },
+        { first: "Johannes", last: "Kepler", year: 1571 },
+        { first: "Nicolaus", last: "Copernicus", year: 1473 },
+        { first: "Max", last: "Planck", year: 1858 }
+        ];
+        const markup = `
+        <ul class="list">
+            ${inventors.map(inventor => `<li>${inventor.first} ${inventor.last} was born in the year ${inventor.year}</li>`).join('')}
+        </ul>    
+        `;
+
+        document.body.innerHTML = markup;
+
+        //====================== HTML Fragments More =========================== //
+        
+        const song = {
+            name: 'Dying to live',
+            artist: 'Tupac',
+            featuring: 'Biggie Smalls'
+        };
+
+        const markupMore = `
+                <div class="song">
+                    <p>
+                         ${song.name} - ${song.artist}
+                         ${song.featuring? `(Featuring ${song.featuring})`:''}   
+                    </p>
+                </div>    
+        `;
+
+        // document.body.append(markupMore)
+
+        document.body.innerHTML += markupMore;
+
+        //====================== HTML Fragments Functions =========================== //
+        
+        const renderFunction = function(inventors){
+            return `${inventors.map(inventor => `<li>${inventor.first} ${inventor.last} was born in the year ${inventor.year}</li>`).join('')}`;
+        }
+        
+        const markupRender = `
+                <div class="inventors">
+                    <h1> Inventors </h2>
+                    <ul>
+                        ${renderFunction(inventors)}
+                    </ul>        
+                </div>    
+        `;
+
+        document.body.innerHTML += markupRender;
+
+        //====================== Tagged Literal =========================== //
+
+        const person = {
+            name: 'Vetri',
+            age: 32,
+            city: 'BTL'
+        }
+        
+        const highlight = function(strings, ...values){
+            
+            let str = "";
+            strings.forEach((string, i) => {
+                str += `${string} <span class="hl">${values[i] || ''}</span>`;
+            });
+
+            return str;
+        }
+
+        const sentence = highlight`Hi! My name is ${person.name}, age ${person.age}, living in ${person.city}`;
+
+        document.body.innerHTML += sentence;
+
+        //====================== Tagged Literal + 1 =========================== //
+
+        const dict = {
+            HTML : 'Hyper Text Markup Language',
+            CSS: 'Cascading Style Sheets',
+            JS: 'Javascript'
+        }
+
+        const first = "Vetrichelvan";
+        const last = "Jeyapalpandy";
+
+        const addAbbrevations = function(strings, ...values){
+            const abbrevated = values.map(value => {
+                if(dict[value]){
+                    return `<abbr title="${dict[value]}">${value}</abbr>`
+                }
+
+                return value;
+            })
+
+            return strings.reduce((sentence, string, i) => {
+                return `${sentence}${string}${abbrevated[i] || ''}`
+            }, '')
+        }
+
+        const sentenceNew = addAbbrevations`, I love coding ${'HTML'}, ${'CSS'} and ${'JS'}`;
+        
+        document.body.innerHTML += sentenceNew;
+
+
+    </script>
+</body>
+</html>
