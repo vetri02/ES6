@@ -10,6 +10,9 @@
 
 <body>
     <script>
+
+        //====================== Destructuring Objects =========================== //
+
         const person = {
             first: 'Vetrichelvan',
             last: 'Jeyapalpandy',
@@ -19,6 +22,76 @@
         };
 
         const { first, last, twitter } = person;
+
+        const vetri = {
+            first: 'Vetrichelvan',
+            last: 'Jeyapalpandy',
+            links: {
+            social: {
+                twitter: 'https://twitter.com/vetri02',
+                github: 'https://github.com/vetri02',
+            },
+            web: {
+                blog: 'https://thetascript.com'
+            }
+            }
+        };
+
+        const {github: gb, twitter: twit} = vetri.links.social;
+
+        console.log(gb);
+        console.log(twit);
+
+        const settings = { width: 300, color: 'blue' }  
+
+        const {width = 100, height = 200, color = black, fontSize = 12} = settings;
+
+        const { b: border = 100, 0: outline = 200 } = {b : 222}
+
+        //====================== Destructuring Arrays =========================== //
+        
+        const details = ['Vetri', 123, 'thetascript.com'];
+        const [name, id, web] = details;
+
+        const team = ['jeyapal', 'yazhini', 'tamil', 'thenmozhi', 'vetri']
+
+        const [captain, assistant, ...players] = team;
+
+        console.log(captain)
+        console.log(assistant)
+        console.log(players)
+
+         //====================== Destructuring Swap =========================== //
+
+         let inRing = 'Hulk Hogan';
+         let onSide = 'The Rock';    
+
+         [inRing, onSide] =  [onSide, inRing]
+
+         //====================== Destructuring Functions =========================== //
+
+         function convertCurrency(amount) {
+             return {
+                 USD: amount * 0.89,
+                 GBP: amount * 0.78,
+                 AUD: amount * 0.28,
+                 MEX: amount * 0.45
+             }
+
+         }
+
+         const {USD, AUD} = convertCurrency(100);
+
+         console.log(USD, AUD);
+
+         function tipCalc({total = 100, tip = 0.12, tax = 0.25} = {}) {
+             return total + (total * tax) + (total * tip)
+         }
+
+         const tip = tipCalc({total:100, tax: 0.13})
+
+         console.log(tip)
+
     </script>
 </body>
 
