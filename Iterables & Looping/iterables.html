@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Iterables & Looping</title>
+</head>
+<body>
+    <script>
+        //====================== for of loop =========================== //
+
+        const fruits = ['Apple', 'Mango', 'Orange', 'Pineapple', 'Grapes'];
+
+        for(let i = 0; i < fruits.length; i++) {
+            console.log(fruits[i])
+        }
+
+        fruits.forEach((fruit) => {
+            console.log(fruit)
+        })
+
+        for (const index in fruits){
+            console.log(fruits[index]) // this will loop thru array prototype and property as well
+        }
+
+        for (const fruit of fruits) {
+            console.log(fruit)
+            if(fruit === 'Orange'){
+                break;
+                // continue;
+            }
+        }
+
+        //Entries
+        for(const [i, fruit] of fruits.entries()){
+            console.log(`${fruit} is the ${i}`)
+        }
+
+        function addNumbers(){
+            console.log(arguments)
+            let total = 0;
+            for(num of arguments) {
+                total += num
+            }
+            console.log(total)
+            return total;
+
+        }   
+
+        addNumbers(12,213,434,55,66,33);
+
+        // Objects
+
+        const apple = {
+            color: 'Red',
+            weight: '20gm',
+            size: 'medium',
+            sugar: '10'
+        }
+
+        for(const prop of Object.keys(apple)){
+            console.log(apple[prop])
+        }
+
+    </script>
+</body>
+</html>
