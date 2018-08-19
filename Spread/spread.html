@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spread Operator</title>
+</head>
+
+<body>
+
+    <script>
+        const featured = ['Deep Dish', 'Pepperoni', 'Hawaiian'];
+        const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];
+
+        const pizza = [...featured, 'veg', ...specialty];
+
+        const fridayPizzas = [...pizza];
+
+        console.log(pizza);
+
+        const deepDish = {
+            pizzaName: 'Deep Dish',
+            size: 'Medium',
+            ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+        };
+
+        const ingredients = ['Milk', ...deepDish.ingredients]
+
+        console.log(ingredients)
+
+        //====================== Spreading more =========================== //
+
+        const comments = [
+            { id: 209384, text: 'I love your dog!' },
+            { id: 523423, text: 'Cuuute! 🐐' },
+            { id: 632429, text: 'You are so dumb' },
+            { id: 192834, text: 'Nice work on this wes!' },
+        ];
+        const id = 632429;
+
+        const commentIndex = comments.findIndex(comment => comment.id === id)
+
+        console.log(commentIndex)
+
+        const newComments = [...comments.slice(0, commentIndex), ...comments.slice(commentIndex + 1)]
+
+        console.log(newComments)
+
+
+        //====================== Spreading into a function =========================== //
+
+        const inventors = ['Einstein', 'Newton', 'Galileo'];
+        const newInventors = ['Musk', 'Jobs'];
+
+        inventors.push(...newInventors)
+
+        console.log(inventors)
+
+        const name = ['Vetri', 'J']
+
+        function sayName(first, last) {
+            console.log(`Hi! ${first} ${last}`)
+        }
+
+        sayName(...name)
+
+        //====================== Rest Operator =========================== //
+
+        function convertCurrency(rates, ...amounts) {
+            return amounts.map(amount => amount * rates)
+        }
+
+        const amounts = convertCurrency(1.23, 23, 34, 55, 56)
+
+        console.log(amounts)
+
+
+    </script>
+</body>
+
+</html>
