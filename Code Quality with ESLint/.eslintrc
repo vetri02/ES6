@@ -3,8 +3,9 @@
     "es6": true,
     "browser": true
   },
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier"],
   "rules": {
     "no-console": 0
-  }
+  },
+  "plugins": ["prettier"]
 }
