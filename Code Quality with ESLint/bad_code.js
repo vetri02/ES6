@@ -1,0 +1,82 @@
+const p = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    // resolve('Hi am a Promise')
+    reject(Error('Err onboard'));
+  }, 1000);
+});
+
+p.then((data) => {
+  console.log(data);
+}).catch((err) => {
+  console.log(err);
+});
+
+//= ===================== Chaining Promises =========================== //
+
+const posts = [
+  { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
+  { title: 'CSS!', author: 'Chris Coyier', id: 2 },
+  { title: 'Dev tools tricks', author: 'Addy Osmani', id: 3 },
+];
+const authors = [
+  { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian Developer' },
+  {
+    name: 'Chris Coyier',
+    twitter: '@chriscoyier',
+    bio: 'CSS Tricks and CodePen',
+  },
+  { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler' },
+];
+
+function getPostId(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const post = posts.find(postItem => postItem.id === id);
+      if (post) {
+        resolve(post);
+      } else {
+        reject(Error('Post not found'));
+      }
+    }, 200);
+  });
+}
+
+function hydrateAuthor(post) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const authorDetails = authors.find(person => person.name === post.author);
+      if (authorDetails) {
+        const postPassed = post;
+        postPassed.author = authorDetails;
+        resolve(postPassed);
+      } else {
+        reject(Error('author not found'));
+      }
+    }, 200);
+  });
+}
+
+getPostId(2)
+  .then((post) => {
+    console.log(post);
+    return hydrateAuthor(post);
+  })
+  .then((post) => {
+    console.log(post);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+//= ===================== Multiple Promises =========================== //
+
+const postsPromise = fetch('https://wesbos.com/wp-json/wp/v2/posts');
+const streetCarsPromise = fetch(
+  'http://data.ratp.fr/api/datasets/1.0/search/?q=paris',
+);
+
+Promise.all([postsPromise, streetCarsPromise])
+  .then(responses => Promise.all(responses.map(res => res.json())))
+  .then((responses) => {
+    console.log(responses);
+  });
