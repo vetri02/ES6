@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inheritanec Review</title>
+</head>
+
+<body>
+
+    <script>
+        // function Dog(name, breed) {
+        //     this.name = name;
+        //     this.breed = breed;
+        // }
+
+        // const snickers = new Dog('Snickers', 'King Charles');
+        // const sunny = new Dog('Sunny', 'Golden retriever');
+
+        // Dog.prototype.bark = function () {
+        //     console.log(`Bark Bark! my name is ${this.name}`)
+        // }
+
+        // Dog.prototype.cuddle = function () {
+        //     console.log(`Hug owner`)
+        // }
+
+        class Dog {
+            constructor(name, breed) {
+                this.name = name;
+                this.breed = breed;
+            }
+            bark() {
+                console.log(`Bark Bark! my name is ${this.name}`)
+            }
+            cuddle() {
+                console.log(`Hug owner`)
+            }
+
+            static info() {
+                console.log('Can only be called on the Class')
+            }
+
+            get description() {
+                return `${this.name} is a ${this.breed} of a dog`
+            }
+
+            set nicknames(value) {
+                this.nick = value.trim();
+            }
+
+            get nicknames() {
+                return this.nick;
+            }
+        }
+
+        const snickers = new Dog('Snickers', 'King Charles');
+        const sunny = new Dog('Sunny', 'Golden retriever');
+
+    </script>
+</body>
+
+</html>
