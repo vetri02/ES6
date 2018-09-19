@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sets</title>
+</head>
+
+<body>
+
+    <script>
+        const people = new Set();
+
+        people.add('Vetri')
+        people.add('Tamil')
+        people.add('Yazhini')
+
+        for (const person of people) {
+            console.log(person)
+        }
+
+        const students = new Set(['Joe', 'John', 'Wick'])
+
+        const newbies = ['Mark', 'Russel']
+        const newStudents = new Set(newbies);
+
+        // ========== Brunch ================== //
+        console.info(`Brunch`)
+        const brunch = new Set();
+        brunch.add('Joe')
+        brunch.add('John')
+        brunch.add('Wick')
+
+        console.log(brunch)
+
+        const line = brunch.values()
+        console.log(line)
+        console.log(line.next().value)
+        console.log(line.next().value)
+        console.log(line.next().value)
+
+        console.log(line)
+
+        brunch.add('Marshal')
+        brunch.add('Jack')
+
+        console.log(line)
+        // NOT WORKING ANYMORE MAY BE
+        // A FUNCTIONALITY CHANGE IN ES6
+        console.log(line.next().value)
+        console.log(line.next().value)
+
+        // ========= Weak Sets =============//
+
+        let dog1 = { name: 'Sugar', age: 2 };
+        let dog2 = { name: 'Salt', age: 3 };
+
+        const dogs = new WeakSet([dog1, dog2]);
+
+        console.log(dogs);
+        dog2 = null
+        console.log(dogs);
+
+        // NEEDS  TO BE REVISITED
+    </script>
+
+</body>
+
+</html>
