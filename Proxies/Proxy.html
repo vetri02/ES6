@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Proxies</title>
+</head>
+
+<body>
+    <script>
+        const person = { name: 'Vetri', age: 32 };
+        const personProxy = new Proxy(person, {
+            get(target, name) {
+                console.log(target, name)
+                return target[name].toUpperCase();
+            },
+            set(target, name, value) {
+                if (typeof value === 'string') {
+                    target[name] = value.trim().toUpperCase() + '✂';
+                }
+            }
+        })
+
+        personProxy.name = 'chelvan'
+
+        // ============== Another Proxy =============== //
+
+        const phoneNumbers = new Proxy({}, {
+            set(target, name, value) {
+                target[name] = value.match(/[0-9]/g).join('')
+            },
+            get(target, name) {
+                return target[name].replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3')
+            }
+        })
+
+        // ============== Proxy with error detection =============== //
+
+        const safeHandler = {
+            set(target, name, value) {
+                const sameKey = Object.keys(target).find(k => k.toLowerCase() == name.toLowerCase());
+
+                if (!(name in target) && sameKey) {
+                    throw new Error(`Oops! Looks like like we already have a(n) ${name} property but with the case of ${sameKey}.`);
+                }
+
+                target[name] = target;
+            }
+        }
+
+        const safety = new Proxy({ id: 100 }, safeHandler)
+    </script>
+</body>
+
+</html>
