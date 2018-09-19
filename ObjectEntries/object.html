@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object iterators</title>
+</head>
+<body>
+    <script>
+      const inventory = {
+      backpacks: 10,
+      jeans: 23,
+      hoodies: 4,
+      shoes: 11
+    };
+
+    const nav = Object.keys(inventory).map((item) => `<li>${item}</li>`).join()
+    console.log(nav)
+
+    const total = Object.values(inventory).reduce((a,b) => a + b)
+    console.log(total)
+
+    Object.entries(inventory).forEach(([key, val]) => {
+        console.log(key, val)    
+    });
+
+    for (const [key, val] of Object.entries(inventory)){ // for can be used if we need to break the loop
+        console.log(key, val)
+        if(key === 'jeans') {
+            break;
+        }
+    }
+    </script>
+</body>
+</html>
