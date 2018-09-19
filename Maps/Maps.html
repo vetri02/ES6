@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Maps</title>
+    <style>
+        button {
+            display: block;
+            position: relative;
+            float: left;
+            width: 120px;
+            padding: 0;
+            margin: 10px 20px 10px 0;
+            font-weight: 600;
+            text-align: center;
+            line-height: 30px;
+            color: #333;
+            border-radius: 5px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>Snakes 🐍</button>
+    <button>Cry 😂</button>
+    <button>Ice Cream 🍦</button>
+    <button>Flamin' 🔥</button>
+    <button>Dancer 💃</button>
+    <script>
+
+        const dogs = new Map();
+
+        // let dog1 = { name: 'Sugar', age: 2 };
+        // let dog2 = { name: 'Salt', age: 3 };
+
+        dogs.set('Sugar', 2)
+        dogs.set('Salt', 3)
+
+        console.log(dogs)
+
+        dogs.forEach((val, key) => console.log(val, key))
+
+        for (const [key, val] of dogs) {
+            console.log(key, val)
+        }
+
+        // =======Maps Metadata and Dom Nodes ======//
+
+        const clickCounts = new Map();
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach(button => {
+            clickCounts.set(button, 0);
+            button.addEventListener('click', function () {
+                const val = clickCounts.get(this);
+                clickCounts.set(this, val + 1);
+                console.log(clickCounts)
+            })
+        })
+
+        // ======= Weak Maps ======//
+
+        let dog1 = { name: 'Sugar' }
+        let dog2 = { name: 'Salt' }
+
+        const strong = new Map();
+        const weak = new WeakMap();
+
+        strong.set(dog1, `Sugar is good`)
+        weak.set(dog2, `Salt is good`)
+
+
+
+    </script>
+</body>
+
+</html>
