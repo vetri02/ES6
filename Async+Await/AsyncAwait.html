@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Async Await</title>
+</head>
+<body>
+    <script>
+        function breath(amount){
+            return new Promise((resolve, reject) => {
+                if(amount < 500){
+                    reject('that is too small')
+                }
+
+                setTimeout(() => {
+                    resolve(`Done for ${amount}`)
+                }, amount);
+            })
+        }
+
+        // Higher Order Function or Can use try catch 
+        function catchErros(fn){
+            return function(...args){
+                return fn(...args).catch((err) =>{
+                    console.error(err)
+                })
+            }
+        }
+
+        async function go(name, last) {
+            // try {
+                console.log(`start ${name} ${last}`);
+                const res = await breath(600)
+                console.log(res)
+                const res1 = await breath(400)
+                console.log(res1)
+                const res2 = await breath(1000)
+                console.log(res2)
+                console.log('end');
+            // } catch(err) {
+            //     console.error(err)
+            // }
+            
+        }
+
+        // go('vetri', 'chelvan')
+
+        const wrappedFunc = catchErros(go);
+
+        wrappedFunc('Vetri', 'chelvan')
+
+
+        // Multiple Promises
+
+        async function getNames(names){
+            console.log(names)
+            const promises = names.map(name => fetch(`https://api.github.com/users/${name}`).then(res => res.json()))
+            console.log(promises)
+            const people = await Promise.all(promises);
+            console.log(people)
+        }
+
+        getNames(['vetri02', 'wesbos'])
+
+        // Promisifying callbacks
+        // navigator.geolocation.getCurrentPosition(function(pos){
+        //     console.log(pos)
+        // }, function(err){
+        //     console.log(err)
+        // })
+
+        function getCurrentPos(...args){
+            return new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(...args,resolve, reject);
+            })
+        }
+
+        async function getPos (){
+            // try {
+                const pos = await getCurrentPos();
+                console.log(pos)
+            //  } catch(err) {
+            //     console.error(err)
+            // }
+        }
+
+        const wrappedFuncPos = catchErros(getPos);
+        wrappedFuncPos()
+    </script>
+</body>
+</html>

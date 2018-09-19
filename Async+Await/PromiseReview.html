@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promises Review</title>
+</head>
+<body>
+    <video controls class="video"></video>
+    <script>
+        // fetch('https://api.github.com/users/vetri02').then(res => {
+        //     // console.log(res)
+        //     return res.json()
+        // }).then(res => {
+        //     console.log(res)
+        // }).catch(err => {
+        //     console.error(err)
+        // })
+
+        const video = document.querySelector('video')
+
+        navigator.mediaDevices.getUserMedia({video: true}).then(media => {
+            video.srcObject = media;
+        }).catch(err => {
+            console.error(err)
+        })
+    </script>
+</body>
+</html>
